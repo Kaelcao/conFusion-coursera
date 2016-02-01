@@ -8,7 +8,30 @@ angular.module('conFusion.controllers', [])
         // listen for the $ionicView.enter event:
         //$scope.$on('$ionicView.enter', function(e) {
         //});
+        $scope.reservation = {};
 
+        $ionicModal.fromTemplateUrl('templates/reserve.html',{
+            scope: $scope
+        }).then(function(modal){
+            $scope.reserveform = modal;
+        });
+
+        $scope.closeReserve = function(){
+            $scope.reserveform.hide();
+        };
+
+        $scope.reserve = function(){
+            $scope.reserveform.show();
+        };
+
+        $scope.doReserve = function(){
+            console.log('Doing reservation',$scope.reservation);
+            // Simulate a reservation delay. Remove this and replace with your reservation
+            // code if using a server system
+            $timeout(function() {
+                $scope.closeReserve();
+            }, 1000);
+        };
         // Form data for the login modal
         $scope.loginData = {};
 
@@ -18,6 +41,8 @@ angular.module('conFusion.controllers', [])
         }).then(function (modal) {
             $scope.modal = modal;
         });
+
+
 
         // Triggered in the login modal to close it
         $scope.closeLogin = function () {
